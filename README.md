@@ -9,7 +9,8 @@ The goal is to simulate philosophers sitting at a table who alternate between:
 
 Each philosopher must eat without causing deadlocks or race conditions, using proper synchronization mechanisms such as **mutexes (mandatory part)** and **process synchronization tools (bonus part)**.
 
-Processes vs Threads
+# Processes vs Threads
+
 For simplicity, let’s think of a process as a “task” and a thread as a “small task” inside it.
 During the core curriculum at 42 Firenze, the Philosophers project (especially the bonus part) was a real turning point in my learning journey.
 A process is the starting point of everything running on a computer. In simple terms, it’s a program in execution—a task you give to the computer. It contains its own variables, data structures, and logic, and typically runs in a linear flow.
