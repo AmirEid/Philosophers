@@ -23,27 +23,45 @@ This is where mutexes come into play. I like to think of them as a toilet with j
 Unlike processes, threads don’t have independent exit statuses. They execute their function, terminate, and the main process can wait for them to finish (e.g., using joins). Threads are lightweight because they share memory, which makes them faster—but also more complex to manage correctly.
 
 Now comes the interesting part from the bonus section of Philosophers:
+
 Instead of using threads, you can solve the same problem using multiple processes.
 In this approach, you don’t just create one task with multiple small tasks—you create multiple independent tasks (processes, philosophers).
+
 The key difference?
+
 Processes do not share memory by default. Each process has its own separate address space and resources. In a way, processes are more “independent” than threads—they don’t like sharing 😄
+
 So how do you coordinate them?
+
 How does the main process know when another process has finished?
+
 This is where concepts like exit statuses, signals, pipes, and semaphores come in.
-When a process finishes, it exits with a status code that the parent process can read (for example, using wait or waitpid). This allows the parent process to understand whether the child succeeded, failed, or ended in a specific state.
+
+When a process finishes, it exits with a status code that the parent process can read (for example, using wait or waitpid). 
+
+This allows the parent process to understand whether the child succeeded, failed, or ended in a specific state.
+
 Signals allow processes to communicate asynchronous events, such as termination requests or interruptions.
-Pipes are a form of inter-process communication used to transfer data in a one-way stream between processes. Unlike signals or exit statuses, pipes are used to send actual data (for example, text or binary information) from one process to another.
+
+Pipes are a form of inter-process communication used to transfer data in a one-way stream between processes. Unlike signals or 
+exit statuses, pipes are used to send actual data (for example, text or binary information) from one process to another.
+
 Semaphores are used for synchronization. They control access to shared resources by allowing a limited number of processes to enter a critical section at the same time. In the Philosophers project, they are commonly used to coordinate access to shared resources like forks.
 
 And that’s the key idea:
+
 When you create multiple processes using fork(), each one gets its own copy of the parent’s data. These copies are independent and not shared.
+
 To coordinate behavior, processes do not rely on shared variables but on operating system mechanisms such as semaphores, signals, or other forms of inter-process communication.
+
 In the Philosophers bonus project, forks are not represented as shared variables in memory. Instead, they are modeled using semaphores, which control how many philosophers can access the resource at the same time.
 
 Want to make it even more complex?
+
 A main process can create other processes, and each of those processes can create its own threads. This combination of processes and threads is common in real-world systems.
 
 Finally, a small note to myself (and anyone reading):
+
 This code was written as part of a learning journey—it’s not optimized for production or meant to show off, but to deeply understand how things work.
 
 ---
