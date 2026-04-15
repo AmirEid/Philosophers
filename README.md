@@ -12,14 +12,19 @@ Each philosopher must eat without causing deadlocks or race conditions, using pr
 # Processes vs Threads
 
 For simplicity, let’s think of a process as a “task” and a thread as a “small task” inside it.
-During the core curriculum at 42 Firenze, the Philosophers project (especially the bonus part) was a real turning point in my learning journey.
+
 A process is the starting point of everything running on a computer. In simple terms, it’s a program in execution—a task you give to the computer. It contains its own variables, data structures, and logic, and typically runs in a linear flow.
 But what if you want to perform multiple actions at the same time using the same data and resources?
+
 That’s where threads come in.
+
 Inside a process, you can create multiple threads—think of them as “small jobs” within the same task. These threads share the same memory and resources of the main process, and each one executes its own part of the logic concurrently.
 This shared access is powerful—but also dangerous.
+
 If multiple threads try to access the same resource at the same time, problems can occur. Who gets access first? Who should wait?
+
 This is where mutexes come into play. I like to think of them as a toilet with just one key 😄—they control access and ensure that only one thread uses a shared resource at a time.
+
 Unlike processes, threads don’t have independent exit statuses. They execute their function, terminate, and the main process can wait for them to finish (e.g., using joins). Threads are lightweight because they share memory, which makes them faster—but also more complex to manage correctly.
 
 Now comes the interesting part from the bonus section of Philosophers:
